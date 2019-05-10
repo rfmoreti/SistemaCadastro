@@ -61,5 +61,18 @@ namespace SistemaCadastro
 
             AtualizaGrid();
         }
+
+        private void btn_Excluir_Click(object sender, EventArgs e)
+        {
+            if(dgv_Pessoa.SelectedRows.Count > 0 )
+            {
+                PessoaMODEL pessoa = (PessoaMODEL)dgv_Pessoa.SelectedRows[0].DataBoundItem;
+                if (MessageBox.Show($"Deseja excluir a pessoa {pessoa.Nome} ? ", "Exclusão de Pessoas", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    BancoDados.Pessoas.Excluir(pessoa);
+                    AtualizaGrid();
+                }
+            }
+        }
     }
 }

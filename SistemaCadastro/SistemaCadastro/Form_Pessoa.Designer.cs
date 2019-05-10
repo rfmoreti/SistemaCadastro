@@ -36,13 +36,14 @@
             this.lbl_NomPesq = new System.Windows.Forms.Label();
             this.txt_NomePesquisa = new System.Windows.Forms.TextBox();
             this.btn_Pesquisar = new System.Windows.Forms.Button();
+            this.btn_Excluir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Pessoa)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_NovaPessoa
             // 
             this.btn_NovaPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_NovaPessoa.Location = new System.Drawing.Point(303, 6);
+            this.btn_NovaPessoa.Location = new System.Drawing.Point(329, 12);
             this.btn_NovaPessoa.Name = "btn_NovaPessoa";
             this.btn_NovaPessoa.Size = new System.Drawing.Size(205, 26);
             this.btn_NovaPessoa.TabIndex = 0;
@@ -117,11 +118,22 @@
             this.btn_Pesquisar.UseVisualStyleBackColor = true;
             this.btn_Pesquisar.Click += new System.EventHandler(this.btn_Pesquisar_Click);
             // 
+            // btn_Excluir
+            // 
+            this.btn_Excluir.Location = new System.Drawing.Point(529, 44);
+            this.btn_Excluir.Name = "btn_Excluir";
+            this.btn_Excluir.Size = new System.Drawing.Size(75, 23);
+            this.btn_Excluir.TabIndex = 5;
+            this.btn_Excluir.Text = "Excluir";
+            this.btn_Excluir.UseVisualStyleBackColor = true;
+            this.btn_Excluir.Click += new System.EventHandler(this.btn_Excluir_Click);
+            // 
             // Form_Pessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 450);
+            this.ClientSize = new System.Drawing.Size(626, 450);
+            this.Controls.Add(this.btn_Excluir);
             this.Controls.Add(this.btn_Pesquisar);
             this.Controls.Add(this.txt_NomePesquisa);
             this.Controls.Add(this.lbl_NomPesq);
@@ -148,5 +160,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tbc_Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn tbc_Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn tbc_Telefone;
+        private System.Windows.Forms.Button btn_Excluir;
     }
 }

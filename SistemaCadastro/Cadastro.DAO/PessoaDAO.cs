@@ -81,25 +81,28 @@ namespace Cadastro.DAO
 
             try
             {
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                cmd.Parameters.AddWithValue(@"Codigo", codigo);
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    reader.Read();
-                    pessoa = new PessoaMODEL()
+                    if (reader.HasRows)
                     {
-                        Codigo = Convert.ToInt32(reader["Codigo"].ToString()),
-                        Nome = reader["Nome"].ToString(),
-                        Telefone = reader["Telefone"].ToString(),
-                        Endereco = reader["Endereco"].ToString(),
-                        Estado = reader["Estado"].ToString(),
-                        Cidade = reader["Cidade"].ToString(),
-                        Numero = reader["Numero"].ToString()
+                        reader.Read();
+                        pessoa = new PessoaMODEL()
+                        {
+                            Codigo = Convert.ToInt32(reader["Codigo"].ToString()),
+                            Nome = reader["Nome"].ToString(),
+                            Telefone = reader["Telefone"].ToString(),
+                            Endereco = reader["Endereco"].ToString(),
+                            Estado = reader["Estado"].ToString(),
+                            Cidade = reader["Cidade"].ToString(),
+                            Numero = reader["Numero"].ToString()
 
-                    };
+                        };
 
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception )
             {
 
                 throw;
@@ -153,6 +156,7 @@ namespace Cadastro.DAO
             bool retorno;
             try
             {
+                cmd.Parameters.AddWithValue("@Codigo", pessoa.Codigo);
                 cmd.Parameters.AddWithValue("@Nome", pessoa.Nome);
                 cmd.Parameters.AddWithValue("@Estado", pessoa.Estado);
                 cmd.Parameters.AddWithValue("@Cidade", pessoa.Cidade);
@@ -172,10 +176,34 @@ namespace Cadastro.DAO
             return retorno;
 
         }
-        //Excluir
+
+
+        //Excluir - Sobrecarga recebendo parametro do tipo PessoaMODEL
         public bool Excluir(PessoaMODEL pessoa)
         {
-            return false; // Retorna true =  excluiu, false = erro
+           return Excluir(pessoa.Codigo);
+        }
+
+            //Excluir - Sobrecarga recebendo parametro do tipo int
+            public bool Excluir(int codigo)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conexao;
+            cmd.CommandText = "DELETE FROM Pessoas WHERE Codigo = @Codigo";
+            bool retorno;
+
+            try
+            {
+                cmd.Parameters.AddWithValue("@Codigo", codigo);
+                cmd.ExecuteNonQuery();
+                retorno = true;
+            }
+            catch (Exception)
+            {
+                retorno = false;
+            }
+
+            return retorno; // Retorna true =  excluiu, false = erro
         }
 
     }
